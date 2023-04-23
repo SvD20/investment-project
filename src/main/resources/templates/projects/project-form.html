@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+
+    <title>Project Directory</title>
+</head>
+
+<body>
+ <div class="container">
+
+     <h3>Project Directory</h3>
+     <hr>
+
+     <p class="h4 mb-4">Save Project</p>
+
+     <form action="#" th:action="@{/projects/save}" th:object="${projectDto}" method="POST">
+
+         <!--Add hidden form field to handle the update-->
+
+         <input type="hidden" th:field="*{id}">
+
+         <div>
+             <input type="text" th:field="*{name_of_project}"
+                    class="form-control mb-4 w-25" placeholder="Name of Project">
+             <ul>
+                 <li th:each="err : ${#fields.errors('name_of_project')}" th:text="${err}" class="error" />
+             </ul>
+         </div>
+
+         <div>
+             <input type="text" th:field="*{discount_rate}"
+                    class="form-control mb-4 w-25" placeholder="Discount rate">
+             <ul>
+                 <li th:each="err : ${#fields.errors('discount_rate')}" th:text="${err}" class="error" />
+             </ul>
+         </div>
+
+         <div>
+             <input type="text" th:field="*{loan_interest_rate}"
+                    class="form-control mb-4 w-25" placeholder="Loan interest rate">
+             <ul>
+                 <li th:each="err : ${#fields.errors('loan_interest_rate')}" th:text="${err}" class="error" />
+             </ul>
+         </div>
+
+         <div>
+             <input type="text" th:field="*{initial_investment}"
+                    class="form-control mb-4 w-25" placeholder="Initial investment">
+             <ul>
+                 <li th:each="err : ${#fields.errors('initial_investment')}" th:text="${err}" class="error" />
+             </ul>
+         </div>
+
+         <div>
+             <input type="text" th:field="*{implementation_period}"
+                    class="form-control mb-4 w-25" placeholder="Implementation period">
+             <ul>
+                 <li th:each="err : ${#fields.errors('implementation_period')}" th:text="${err}" class="error" />
+             </ul>
+         </div>
+
+         <div>
+             <input type="text" th:field="*{profit_per_unit_of_the_implementation_period}"
+                    class="form-control mb-4 w-25" placeholder="Profit per unit of the implementation period csv">
+             <div th:if="${#fields.hasErrors('global')}">
+                 <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+             </div>
+         </div>
+
+         <button type="submit" class="btn btn-info col-2">Save</button>
+
+     </form>
+
+     <hr>
+     <a th:href="@{/projects/list}">Back to Project List</a>
+
+ </div>
+
+</body>
+
+</html>

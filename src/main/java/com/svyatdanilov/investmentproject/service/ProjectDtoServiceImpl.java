@@ -19,7 +19,7 @@ import java.util.Optional;
 public class ProjectDtoServiceImpl implements ProjectDtoService {
 
 	private final ProjectRepository projectRepository;
-	private ProjectAnalyzer projectAnalyzer;
+	private final ProjectAnalyzer projectAnalyzer;
 
 	@Autowired
 	public ProjectDtoServiceImpl(ProjectRepository projectRepository, ProjectAnalyzer projectAnalyzer) {

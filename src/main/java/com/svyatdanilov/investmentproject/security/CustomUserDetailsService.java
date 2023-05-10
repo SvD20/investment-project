@@ -32,6 +32,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                     user.getPassword(),
                     mapRolesToAuthorities(user.getRoles()));
         }else{
+            assert false;
+            if(user.getStatus().equals("blocked")){
+                throw new UsernameNotFoundException("You are blocked by admin");
+            }
             throw new UsernameNotFoundException("Invalid username or password.");
         }
     }

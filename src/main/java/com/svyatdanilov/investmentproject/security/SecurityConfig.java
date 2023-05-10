@@ -31,13 +31,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
-                                .requestMatchers("/users").hasRole("ADMIN")
+                                .requestMatchers("/default").permitAll()
+                                .requestMatchers("/users/**").hasRole("ADMIN")
                                 .requestMatchers("/projects/**").hasRole("EMPLOYEE")
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/default")
                                 .permitAll()
                 ).logout(
                         logout -> logout

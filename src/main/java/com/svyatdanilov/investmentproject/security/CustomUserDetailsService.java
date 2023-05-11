@@ -3,6 +3,7 @@ package com.svyatdanilov.investmentproject.security;
 import com.svyatdanilov.investmentproject.dao.UserRepository;
 import com.svyatdanilov.investmentproject.entity.Role;
 import com.svyatdanilov.investmentproject.entity.User;
+import com.svyatdanilov.investmentproject.exception.UserBlockedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,18 +25,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UserBlockedException,UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
 
         if (user != null) {
+            if(user.getStatus().equals("blocked")){
+                throw new UserBlockedException("You are blocked by admin");
+            }
             return new org.springframework.security.core.userdetails.User(user.getEmail(),
                     user.getPassword(),
                     mapRolesToAuthorities(user.getRoles()));
         }else{
-            assert false;
-            if(user.getStatus().equals("blocked")){
-                throw new UsernameNotFoundException("You are blocked by admin");
-            }
             throw new UsernameNotFoundException("Invalid username or password.");
         }
     }

@@ -40,12 +40,14 @@ public class UserController {
         if(user.get().getStatus().equals("active")){
             user.get().setStatus("blocked");
         }
-        if(user.get().getStatus().equals("blocked")){
+        else{
             user.get().setStatus("active");
         }
         userRepository.save(user.get());
         return "redirect:/users/list";
     }
+
+
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam("userId") int id){

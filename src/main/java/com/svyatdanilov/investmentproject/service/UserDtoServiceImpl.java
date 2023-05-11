@@ -43,7 +43,7 @@ public class UserDtoServiceImpl implements UserDtoService{
         user.setEmail(userDto.getEmail());
         // encrypt the password using spring security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
+        user.setStatus(userDto.getStatus());
         Role role = roleRepository.findByName("ROLE_EMPLOYEE");
         if(role == null){
             role = checkRoleExist();
@@ -71,6 +71,8 @@ public class UserDtoServiceImpl implements UserDtoService{
         userDto.setFirstName(str[0]);
         userDto.setLastName(str[1]);
         userDto.setEmail(user.getEmail());
+        userDto.setId(user.getId());
+        userDto.setStatus(user.getStatus());
         return userDto;
     }
 

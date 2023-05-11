@@ -1,8 +1,10 @@
 package com.svyatdanilov.investmentproject.controller;
 
+import com.svyatdanilov.investmentproject.dao.UserRepository;
 import com.svyatdanilov.investmentproject.dto.UserDto;
 import com.svyatdanilov.investmentproject.entity.User;
 import com.svyatdanilov.investmentproject.service.UserDtoService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 
 @Controller
 public class AuthController {
@@ -56,17 +58,19 @@ public class AuthController {
             return "/register";
         }
 
+        userDto.setStatus("active");
         userService.saveUser(userDto);
         return "redirect:/register?success";
     }
 
-    // handler method to handle list of users
-    @GetMapping("/users")
-    public String users(Model model){
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "users";
+    @RequestMapping("/default")
+    public String defaultAfterLogin(HttpServletRequest request) {
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            return "redirect:/users/list";
+        }
+        return "redirect:/projects/list";
     }
+
 
     // handler method to handle login request
     @GetMapping("/login")

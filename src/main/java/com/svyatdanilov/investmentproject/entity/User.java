@@ -23,6 +23,9 @@ public class User
     @Column(name = "password",nullable=false)
     private String password;
 
+    @Column(name = "status",nullable=false)
+    private String status;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(
             name="users_roles",
@@ -30,14 +33,17 @@ public class User
             inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private List<Role> roles = new ArrayList<>();
 
+
+
     public User() {
     }
 
-    public User(int id, String name, String email, String password, List<Role> roles) {
+    public User(int id, String name, String email, String password, String status, List<Role> roles) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.status = status;
         this.roles = roles;
     }
 
@@ -73,6 +79,14 @@ public class User
         this.password = password;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -88,6 +102,7 @@ public class User
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", status='" + status + '\'' +
                 ", roles=" + roles +
                 '}';
     }

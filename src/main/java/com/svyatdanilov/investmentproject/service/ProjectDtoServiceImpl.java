@@ -5,6 +5,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import com.svyatdanilov.investmentproject.dao.ProjectRepository;
 import com.svyatdanilov.investmentproject.dto.ProjectDto;
 import com.svyatdanilov.investmentproject.entity.Project;
+import com.svyatdanilov.investmentproject.entity.User;
 import com.svyatdanilov.investmentproject.projectanalysis.ProjectAnalyzer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

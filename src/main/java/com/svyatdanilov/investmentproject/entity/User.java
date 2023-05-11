@@ -33,18 +33,29 @@ public class User
             inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private List<Role> roles = new ArrayList<>();
 
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Project> projects;
 
     public User() {
     }
 
-    public User(int id, String name, String email, String password, String status, List<Role> roles) {
+    public User(int id, String name, String email, String password, String status,
+                List<Role> roles, List<Project> projects) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.status = status;
         this.roles = roles;
+        this.projects = projects;
+    }
+
+    public void addProject(Project project){
+        if(projects == null){
+            projects = new ArrayList<>();
+        }
+        projects.add(project);
     }
 
     public int getId() {
@@ -95,6 +106,14 @@ public class User
         this.roles = roles;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -104,6 +123,7 @@ public class User
                 ", password='" + password + '\'' +
                 ", status='" + status + '\'' +
                 ", roles=" + roles +
+                ", projects=" + projects +
                 '}';
     }
 }

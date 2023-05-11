@@ -34,6 +34,7 @@ public class ProjectDto {
     private String profit_per_unit_of_the_implementation_period;
     private String conclusion;
 
+
     public ProjectDto() {
         this.date_of_analysis = new Date(System.currentTimeMillis());
     }

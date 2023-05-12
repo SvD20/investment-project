@@ -15,16 +15,16 @@
         }
     </style>
 
-    <title>Project Directory</title>
+    <title>Управление проектами</title>
 </head>
 
 <body>
  <div class="container">
 
-     <h3>Project Directory</h3>
+     <h3>Управление проектами</h3>
      <hr>
 
-     <p class="h4 mb-4">Save Project</p>
+     <p class="h4 mb-4">Добавить проект</p>
 
      <form action="#" th:action="@{/projects/save}" th:object="${projectDto}" method="POST">
 
@@ -34,7 +34,7 @@
 
          <div>
              <input type="text" th:field="*{name_of_project}"
-                    class="form-control mb-4 w-25" placeholder="Name of Project">
+                    class="form-control mb-4 w-25" placeholder="Название проекта">
              <ul>
                  <li th:each="err : ${#fields.errors('name_of_project')}" th:text="${err}" class="error" />
              </ul>
@@ -42,7 +42,7 @@
 
          <div>
              <input type="text" th:field="*{discount_rate}"
-                    class="form-control mb-4 w-25" placeholder="Discount rate">
+                    class="form-control mb-4 w-25" placeholder="Ставка дисконтирования">
              <ul>
                  <li th:each="err : ${#fields.errors('discount_rate')}" th:text="${err}" class="error" />
              </ul>
@@ -50,7 +50,7 @@
 
          <div>
              <input type="text" th:field="*{loan_interest_rate}"
-                    class="form-control mb-4 w-25" placeholder="Loan interest rate">
+                    class="form-control mb-4 w-25" placeholder="Процент по заемным средствам">
              <ul>
                  <li th:each="err : ${#fields.errors('loan_interest_rate')}" th:text="${err}" class="error" />
              </ul>
@@ -58,7 +58,7 @@
 
          <div>
              <input type="text" th:field="*{initial_investment}"
-                    class="form-control mb-4 w-25" placeholder="Initial investment">
+                    class="form-control mb-4 w-25" placeholder="Начальные вложения">
              <ul>
                  <li th:each="err : ${#fields.errors('initial_investment')}" th:text="${err}" class="error" />
              </ul>
@@ -66,7 +66,7 @@
 
          <div>
              <input type="text" th:field="*{implementation_period}"
-                    class="form-control mb-4 w-25" placeholder="Implementation period">
+                    class="form-control mb-4 w-25" placeholder="Срок реализации">
              <ul>
                  <li th:each="err : ${#fields.errors('implementation_period')}" th:text="${err}" class="error" />
              </ul>
@@ -74,18 +74,18 @@
 
          <div>
              <input type="text" th:field="*{profit_per_unit_of_the_implementation_period}"
-                    class="form-control mb-4 w-25" placeholder="Profit per unit of the implementation period csv">
+                    class="form-control mb-4 w-25" placeholder="Ожидаемый доход за каждую единицу срока реализации в формате csv">
              <div th:if="${#fields.hasErrors('global')}">
                  <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
              </div>
          </div>
 
-         <button type="submit" class="btn btn-info col-2">Save</button>
+         <button type="submit" class="btn btn-info col-2">Сохранить</button>
 
      </form>
 
      <hr>
-     <a th:href="@{/projects/list}">Back to Project List</a>
+     <a th:href="@{/projects/list}">К управлению проектами</a>
 
  </div>
 

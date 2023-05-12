@@ -9,33 +9,33 @@
     <!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-	<title>Project Directory</title>
+	<title>Управление проектами</title>
 </head>
 
 <body>
 
 <div class="container">
 
-	<h3>Project Directory</h3>
+	<h3>Управление проектами</h3>
 	<hr>
 
 	<!-- Add a button -->
 	<a th:href="@{/projects/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
-		Add Project
+		Добавить проект
 	</a>
 
 	<table class="table table-bordered table-striped">
 		<thead class="table-dark">
 			<tr>
-				<th>Name of Project</th>
-				<th>Date of analysis</th>
-				<th>Discount rate</th>
-				<th>Loan interest rate</th>
-				<th>Initial investment</th>
-				<th>Implementation period</th>
-				<th>Profit per unit of the implementation period</th>
-				<th>Conclusion</th>
-				<th>Actions</th>
+				<th>Имя проекта</th>
+				<th>Дата отбора</th>
+				<th>Ставка дисконтирования</th>
+				<th>Процент по заемным средствам</th>
+				<th>Начальные вложения</th>
+				<th>Срок реализации проекта</th>
+				<th>Ожидаемый доход за каждую единицу срока реализации</th>
+				<th>Результат отбора</th>
+				<th></th>
 			</tr>
 		</thead>
 		
@@ -54,13 +54,13 @@
 				<td>
 					<a th:href="@{/projects/showFormForUpdate(projectId=${tempProjectDto.id})}"
 					class="btn btn-info btn-sm">
-						Update
+						Обновить
 					</a>
 					<!--Add delete button link-->
 					<a th:href="@{/projects/delete(projectId=${tempProjectDto.id})}"
 					   class="btn btn-danger btn-sm"
-					   onclick="if (!(confirm('Are you sure you want to delete this project?'))) return false">
-						Delete
+					   onclick="if (!(confirm('Вы действительно хотите удалить этот проект?'))) return false">
+						Удалить
 					</a>
 				</td>
 			</tr>
@@ -73,7 +73,7 @@
 <form th:action="@{/logout}" method="POST" class="form-horizontal">
 	<div style="margin-top: 10px" class="form-group">
 		<div class="col-sm-6 controls">
-			<button type="submit" class="btn btn-success">Logout</button>
+			<button type="submit" class="btn btn-success">Выйти из аккаунта</button>
 		</div>
 	</div>
 </form>

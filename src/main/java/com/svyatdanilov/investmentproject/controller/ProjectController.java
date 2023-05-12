@@ -3,6 +3,7 @@ package com.svyatdanilov.investmentproject.controller;
 import com.opencsv.exceptions.CsvValidationException;
 import com.svyatdanilov.investmentproject.dto.ProjectDto;
 import com.svyatdanilov.investmentproject.service.ProjectDtoService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/projects")
@@ -27,9 +27,8 @@ public class ProjectController {
 	}
 
 	@GetMapping("/list")
-	public String listProjects(Model model) throws CsvValidationException, IOException {
-		List<ProjectDto> projectDtoList = projectService.findAll();
-		model.addAttribute("projectDtoList", projectDtoList);
+	public String listProjects(HttpServletRequest request,Model model) throws CsvValidationException, IOException {
+		model.addAttribute("projectDtoList", projectService.findAll(request.getUserPrincipal().getName()));
 		return "projects/list-projects";
 	}
 
@@ -49,11 +48,12 @@ public class ProjectController {
 
 
 	@PostMapping("/save")
-	public String saveEmployee(@Valid ProjectDto projectDto, BindingResult result) {
+	public String saveEmployee(@Valid ProjectDto projectDto, BindingResult result,
+							   HttpServletRequest httpServletRequest) {
 		if (result.hasErrors()) {
 			return "projects/project-form";
 		}
-		projectService.save(projectDto);
+		projectService.save(projectDto,httpServletRequest.getUserPrincipal().getName());
 		return "redirect:/projects/list";
 	}
 

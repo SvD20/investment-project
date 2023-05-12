@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface ProjectDtoService {
 
-	List<ProjectDto> findAll() throws CsvValidationException, IOException;
+	List<ProjectDto> findAll(String userEmail) throws CsvValidationException, IOException;
 	
 	ProjectDto findById(int id);
-	
-	void save(ProjectDto projectDto);
-	
+
+	void save (ProjectDto projectDto,String userEmail);
+
 	void deleteById(int id);
 	
 }

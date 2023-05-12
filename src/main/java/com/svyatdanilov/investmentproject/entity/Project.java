@@ -33,12 +33,16 @@ public class Project {
     @Column(name="profit_per_unit_of_the_implementation_period")
     private String profit_per_unit_of_the_implementation_period;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Project() {
     }
 
-    public Project(String name_of_project, Date date_of_analysis, double discount_rate,double loan_interest_rate,
-                   double initial_investment, int implementation_period,
-                   String profit_per_unit_of_the_implementation_period) {
+    public Project(String name_of_project, Date date_of_analysis, double discount_rate, double loan_interest_rate,
+                   double initial_investment, int implementation_period, String profit_per_unit_of_the_implementation_period,
+                   User user) {
         this.name_of_project = name_of_project;
         this.date_of_analysis = date_of_analysis;
         this.discount_rate = discount_rate;
@@ -46,11 +50,12 @@ public class Project {
         this.initial_investment = initial_investment;
         this.implementation_period = implementation_period;
         this.profit_per_unit_of_the_implementation_period = profit_per_unit_of_the_implementation_period;
+        this.user = user;
     }
 
     public Project(int id, String name_of_project, Date date_of_analysis, double discount_rate, double loan_interest_rate,
                    double initial_investment, int implementation_period,
-                   String profit_per_unit_of_the_implementation_period) {
+                   String profit_per_unit_of_the_implementation_period, User user) {
         this.id = id;
         this.name_of_project = name_of_project;
         this.date_of_analysis = date_of_analysis;
@@ -59,6 +64,7 @@ public class Project {
         this.initial_investment = initial_investment;
         this.implementation_period = implementation_period;
         this.profit_per_unit_of_the_implementation_period = profit_per_unit_of_the_implementation_period;
+        this.user = user;
     }
 
     public int getId() {
@@ -125,6 +131,14 @@ public class Project {
         this.loan_interest_rate = loan_interest_rate;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -136,6 +150,7 @@ public class Project {
                 ", initial_investment=" + initial_investment +
                 ", implementation_period=" + implementation_period +
                 ", profit_per_unit_of_the_implementation_period='" + profit_per_unit_of_the_implementation_period + '\'' +
+                ", user=" + user +
                 '}';
     }
 }
